@@ -13,7 +13,7 @@
         </commentGenerator>
         <!--数据库连接驱动类,URL，用户名、密码 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/test?serverTimezone=UTC" userId="root" password="BaoBao1205B201">
+                        connectionURL="jdbc:mysql://10.242.220.176:3306/test?serverTimezone=UTC" userId="root" password="BaoBao1205B201">
         </jdbcConnection>
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
