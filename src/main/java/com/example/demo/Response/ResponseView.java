@@ -4,6 +4,7 @@ package com.example.demo.Response;
 import lombok.Data;
 import static javax.security.auth.callback.ConfirmationCallback.OK;
 
+//该注解需要lombok插件，可以自动生成get set方法
 @Data
 public class ResponseView {
 

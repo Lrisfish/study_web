@@ -22,9 +22,9 @@ public class ArticleController {
 
     /**根据用户id查询所有文章**/
     //两种方法数据均可取到，主要是前端不会写
-    @RequestMapping(value = "/showAllArticle", method = RequestMethod.POST)
-    public String showAllArticle(Map<String,Object> map, HttpServletRequest request){
-    //public ResponseView showAllArticle(Map<String,Object> map, HttpServletRequest request){
+    @RequestMapping(value = "/showAllArticle", method = RequestMethod.GET)
+    //public String showAllArticle(Map<String,Object> map, HttpServletRequest request){
+    public ResponseView showAllArticle(HttpServletRequest request){
         HttpSession session = request.getSession(false);
         int master_id = (int)session.getAttribute("master_id");
         System.out.println(master_id);
@@ -36,9 +36,9 @@ public class ArticleController {
             responseView.setCode(ResponseView.ERROR_CODE);
             responseView.setMessage(ResponseView.ERROR_MESSAGE);
         }
-        map.put("MasterArticleList", responseView);
-        return "showAllArticle";
-        //return responseView;
+        //map.put("MasterArticleList", responseView);
+        //return "showAllArticle";
+        return responseView;
     }
 
 }
