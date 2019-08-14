@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" content="text/html" http-equiv="content-type">
+    <title>welcome</title>
+</head>
+<body>
+    <h1>欢迎进入学习课题</h1>
+    <form action="/user/exit" method="post">
+        <a href="/user/exit" target="_blank">退出登陆</a>
+    </form>
+    <form action="/user/showMasterMessage" method="post">
+        <a href="/user/showMasterMessage" target="_blank">点击查看用户信息</a>
+    </form>
+
+    <form action="/article/showAllArticle" method="post">
+        <input type="submit" value="我的文章">
+        <a href="/article/showAllArticle" target="_blank">点击查看我的文章</a>
+    </form>
+
+</body>
+</html>

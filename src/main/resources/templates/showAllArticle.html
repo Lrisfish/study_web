@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+    <title>Title</title>
+    <script th:inline="javascript">
+        function showMasterArticle() {
+            document.getElementById("master_id").innerHTML = "Thymeleaf String by JS:"+ [[${master_id}]];
+            var MasterArticleList;
+            document.getElementById("MasterArticleList").innerHTML = "Thymeleaf String by JS:"+ MasterArticleList.result;
+        }
+
+    </script>
+
+</head>
+<body>
+<p th:text="'id = '+ ${MasterArticleList.result.id}">test</p>
+<p th:text="'articleTitle = '+ ${MasterArticleList.result.articleTitle}">test</p>
+<p th:text="'articleContent = '+ ${MasterArticleList.result.articleContent}">test</p>
+<p th:text="'masterId = '+ ${MasterArticleList.result.masterId}">test</p>
+</body>
+</html>
