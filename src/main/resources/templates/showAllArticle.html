@@ -3,21 +3,39 @@
 <head>
     <meta content="text/html; charset=UTF-8" http-equiv="content-type">
     <title>Title</title>
-    <script th:inline="javascript">
-        function showMasterArticle() {
-            document.getElementById("master_id").innerHTML = "Thymeleaf String by JS:"+ [[${master_id}]];
-            var MasterArticleList;
-            document.getElementById("MasterArticleList").innerHTML = "Thymeleaf String by JS:"+ MasterArticleList.result;
-        }
-
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        $(function(){
+            $(':input:eq(0)').click(function () {
+                $.ajax({
+                    url:'/article/showAllArticle',
+                    type:'get',
+                    dataType:'json',
+                    success: function (datas) {
+                        var tbhtml = "<tr><th>id</th><th>article_title</th><th>article_content</th><th>master_id</th></tr>"
+                         for(var i = 0; i<datas.length; i++){
+                              tbhtml+="<tr><td>"+datas[i].result.id+"</td><td>"+datas[i].result.articleTitle+"</td><td>"+datas[i].result.articleContent+"</td><td>"+datas[i].result.masterId+"</td></tr>"
+                         }
+                         $('table:eq(0)').html(tbhtml);
+                    }
+                })
+            })
+        })
     </script>
 
 </head>
 <body>
-<p th:text="'id = '+ ${MasterArticleList.result.id}">test</p>
-<p th:text="'articleTitle = '+ ${MasterArticleList.result.articleTitle}">test</p>
-<p th:text="'articleContent = '+ ${MasterArticleList.result.articleContent}">test</p>
-<p th:text="'masterId = '+ ${MasterArticleList.result.masterId}">test</p>
+    <div>
+        <table border="1px solid">
+             <tr>
+                 <th>id</th>
+                 <th>article_title</th>
+                 <th>article_content</th>
+                 <th>master_id</th>
+             </tr>
+        </table>
+        <input type="button" value="加载数据">
+    </div>
 local dev modified!!!
 </body>
 </html>
