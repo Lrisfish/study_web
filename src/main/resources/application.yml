@@ -4,10 +4,10 @@ server:
 spring:
   datasource:
     name: test
-    url: jdbc:mysql://localhost:3306/test
+    url: jdbc:mysql://localhost:3306/sendemail
     username: root
     password: BaoBao1205B201
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml  #注意：一定要对应mapper映射xml文件的所在路径
