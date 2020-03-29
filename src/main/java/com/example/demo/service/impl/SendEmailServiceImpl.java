@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -62,5 +62,34 @@ public class SendEmailServiceImpl implements SendEmailService {
         resultDto.setData(emailContent);
         return resultDto ;
     }
+
+    @Override
+    public ResultDto emailMerge(List<String> groupNameList, List<Integer> historyNumberList){
+        String templateName = "PRETEST_RELEASE";
+        ResultDto resultDto = new ResultDto();
+        List<String> contentList = new ArrayList<>();
+        for (int i=0; i<groupNameList.size();i++){
+
+            emailGroup copyEmailRecipient = emailGroupMapper.selectByGroupName(groupNameList.get(i));
+            emailTemplate mainEmailRecipient = emailTemplateMapper.selectByTemplateName(templateName);
+            int groupId = copyEmailRecipient.getGroupId();
+            int templateId = mainEmailRecipient.getEmailTemplateId();
+            List<email> historyEmail = emailMapper.selectByTemplateIdAndGroupId(groupId,templateId);
+            if(historyEmail.size()<historyNumberList.get(i)){
+                resultDto.setErrors("暂无历史发送邮件！");
+                return resultDto;
+            }
+            email emailContent = historyEmail.get(historyNumberList.get(i));
+            String content = emailContent.getEmailContent();
+            contentList.add(content);
+        }
+
+        //解析 合并
+
+
+
+        return resultDto ;
+    }
+
 
 }

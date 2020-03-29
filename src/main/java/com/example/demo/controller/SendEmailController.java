@@ -71,7 +71,16 @@ public class SendEmailController {
     @GetMapping(value = "/emailMerge")
     public ResultDto<ResultDto> emailMerge(@RequestBody List<String> groupNameList, @RequestBody List<Integer> historyNumberList){
         ResultDto<ResultDto> result = new ResultDto<>();
-
+        if(groupNameList.size()==0){
+            result.setErrors("请选择合并组及其合并内容");
+            return result;
+        }
+        if(groupNameList.size()!=historyNumberList.size()){
+            result.setErrors("请选择合并组及其合并内容");
+            return result;
+        }
+        ResultDto config = sendEmailService.emailMerge(groupNameList,historyNumberList);
+        result.setData(config);
         return result;
     }
 
