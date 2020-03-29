@@ -5,9 +5,9 @@ import com.example.demo.service.SendEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping(value = {"/sendEmail"})
@@ -37,8 +37,43 @@ public class SendEmailController {
         return result;
     }
 
+    /**通过邮件模板名称查询收件人邮箱**/
+    @GetMapping("/getEmailRecipientByTemplateName")
+    public ResultDto<ResultDto> getEmailRecipientByTemplateName(@RequestParam(value = "templateName") String templateName) {
 
+        ResultDto<ResultDto> result = new ResultDto<>();
+        if (StringUtils.isEmpty(templateName)) {
+            result.setErrors("缺少参数，请检查！");
+            return result;
+        }
+        ResultDto config = sendEmailService.getEmailRecipientByTemplateName(templateName);
+        result.setData(config);
+        return result;
+    }
 
+    /**查询历史邮件**/
+    @GetMapping("/queryHistoryEmail")
+    public ResultDto<ResultDto> queryHistoryEmail(@RequestParam(value = "groupName") String groupName,
+                                                  @RequestParam(value = "templateName") String templateName,
+                                                  @RequestParam(value = "historyNumber") int historyNumber) {
+
+        ResultDto<ResultDto> result = new ResultDto<>();
+        if (StringUtils.isEmpty(groupName) || StringUtils.isEmpty(templateName) || StringUtils.isEmpty(historyNumber)) {
+            result.setErrors("缺少参数，请检查！");
+            return result;
+        }
+        ResultDto config = sendEmailService.queryHistoryEmail(groupName,templateName,historyNumber);
+        result.setData(config);
+        return result;
+    }
+
+    /**邮件合并**/
+    @GetMapping(value = "/emailMerge")
+    public ResultDto<ResultDto> emailMerge(@RequestBody List<String> groupNameList, @RequestBody List<Integer> historyNumberList){
+        ResultDto<ResultDto> result = new ResultDto<>();
+
+        return result;
+    }
 
 
 }
